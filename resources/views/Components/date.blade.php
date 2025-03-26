@@ -70,16 +70,16 @@
         <p>點擊員工後會顯示目前員工可以的時間</p>
     </div>
     <div id="tab2" class="tab-content">
-        <h2>訂購資訊</h2>
+        <h2>新增預約</h2>
         <form action="" method="get" class="form-example">
             <div class="form-example">
-                <label for="name">與會人員</label>
+                <label for="name">時間</label>
                 <select>
                     <option>請選擇</option>
                 </select>
             </div>
             <div class="form-example">
-                <label for="name">時間</label>
+                <label for="name">與會人員</label>
                 <select>
                     <option>請選擇</option>
                 </select>
