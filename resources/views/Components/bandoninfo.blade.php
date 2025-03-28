@@ -62,20 +62,20 @@
 </script>
 <div class="tab-container">
     <div class="tabs">
-        <button class="tab-button active" onclick="switchTab(event, 'tab1')">商家資訊</button>
-        <button class="tab-button" onclick="switchTab(event, 'tab2')">訂購資訊</button>
-        <button class="tab-button" onclick="switchTab(event, 'tab3')">新增店家</button>
-        <button class="tab-button" onclick="switchTab(event, 'tab4')">團購去</button>
+        <button class="tab-button active" onclick="switchTab(event, 'store-info-tab')">商家資訊</button>
+        <button class="tab-button" onclick="switchTab(event, 'order-info-tab')">訂購資訊</button>
+        <button class="tab-button" onclick="switchTab(event, 'new-store-tab')">新增店家</button>
+        <button class="tab-button" onclick="switchTab(event, 'new-order-tab')">團購去</button>
     </div>
-    <div id="tab1" class="tab-content active">
+    <div id="store-info-tab" class="tab-content active">
         <h2>商家資訊</h2>
         <p>列出所有商家資訊。</p>
     </div>
-    <div id="tab2" class="tab-content">
+    <div id="order-info-tab" class="tab-content">
         <h2>訂購資訊</h2>
         <p>列出還在時限內的所有團購單 ＆ 團購連結。</p>
     </div>
-    <div id="tab3" class="tab-content">
+    <div id="new-store-tab" class="tab-content">
         <h2>新增店家</h2>
         <form action="" method="get" class="form-example">
             <div class="form-example">
@@ -103,7 +103,7 @@
             </div>
         </form>
     </div>
-    <div id="tab4" class="tab-content">
+    <div id="new-order-tab" class="tab-content">
         <h2>團購去</h2>
         <form action="" method="get" class="form-example">
             <div class="form-example">

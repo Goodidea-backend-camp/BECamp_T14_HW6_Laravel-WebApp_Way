@@ -62,14 +62,14 @@
 </script>
 <div class="tab-container">
     <div class="tabs">
-        <button class="tab-button active" onclick="switchTab(event, 'tab1')">員工清單</button>
-        <button class="tab-button" onclick="switchTab(event, 'tab2')">新增預約</button>
+        <button class="tab-button active" onclick="switchTab(event, 'employ-list-tab')">員工清單</button>
+        <button class="tab-button" onclick="switchTab(event, 'new-appointment-tab')">新增預約</button>
     </div>
-    <div id="tab1" class="tab-content active">
+    <div id="employ-list-tab" class="tab-content active">
         <h2>員工清單</h2>
         <p>點擊員工後會顯示目前員工可以的時間</p>
     </div>
-    <div id="tab2" class="tab-content">
+    <div id="new-appointment-tab" class="tab-content">
         <h2>新增預約</h2>
         <form action="" method="get" class="form-example">
             <div class="form-example">
