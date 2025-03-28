@@ -77,50 +77,50 @@
     </div>
     <div id="new-store-tab" class="tab-content">
         <h2>新增店家</h2>
-        <form action="" method="get" class="form-example">
-            <div class="form-example">
+        <form action="" method="get" class="add-store-form">
+            <div>
                 <label for="name">店家名稱</label>
                 <input type="text" id="name" name="name">
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">簡介</label>
                 <input type="text" id="info" name="info">
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">電話</label>
                 <input type="text" id="phone" name="phone">
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">地址</label>
                 <input type="text" id="address" name="address">
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">產品</label>
                 <input type="text" id="product" name="product">
             </div>
-            <div class="form-example">
+            <div>
                 <input type="submit" value="Subscribe!" />
             </div>
         </form>
     </div>
     <div id="new-order-tab" class="tab-content">
         <h2>團購去</h2>
-        <form action="" method="get" class="form-example">
-            <div class="form-example">
+        <form action="" method="get" class="group-buy-form">
+            <div>
                 <label for="name">篩選</label>
                 <select>
                     <option>請選擇</option>
                 </select>
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">負責人</label>
                 <input type="text" id="name" name="name">
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">截止時間</label>
                 <input type="text" id="end-time" name="end-time">
             </div>
-            <div class="form-example">
+            <div>
                 <input type="submit" value="Subscribe!" />
             </div>
         </form>

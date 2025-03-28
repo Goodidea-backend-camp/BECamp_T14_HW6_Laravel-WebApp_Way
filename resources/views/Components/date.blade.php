@@ -71,20 +71,20 @@
     </div>
     <div id="new-appointment-tab" class="tab-content">
         <h2>新增預約</h2>
-        <form action="" method="get" class="form-example">
-            <div class="form-example">
+        <form action="" method="get" class="appointment-form">
+            <div>
                 <label for="name">時間</label>
                 <select>
                     <option>請選擇</option>
                 </select>
             </div>
-            <div class="form-example">
+            <div>
                 <label for="name">與會人員</label>
                 <select>
                     <option>請選擇</option>
                 </select>
             </div>
-            <div class="form-example">
+            <div>
                 <input type="submit" value="Subscribe!" />
             </div>
         </form>
