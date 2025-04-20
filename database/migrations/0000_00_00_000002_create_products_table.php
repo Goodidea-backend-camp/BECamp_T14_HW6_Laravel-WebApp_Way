@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('property');
-            $table->integer('price');
+            $table->decimal('price', 10, 2)->unsigned();
         });
     }
 
