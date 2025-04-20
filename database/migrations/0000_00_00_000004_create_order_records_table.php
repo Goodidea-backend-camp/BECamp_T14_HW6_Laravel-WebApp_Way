@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('number');
             $table->integer('total_price');
-            $table->boolean("is_paid");
+            $table->boolean('is_paid');
             $table->string('description');
         });
     }
