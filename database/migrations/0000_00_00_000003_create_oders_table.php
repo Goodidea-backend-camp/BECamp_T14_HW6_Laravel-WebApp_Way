@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('create_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->date('created_at');
-            $table->date('end_at');
+            $table->dateTime('created_at');
+            $table->dateTime('end_at');
         });
     }
 
