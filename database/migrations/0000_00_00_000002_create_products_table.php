@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade'); #foreignId('store_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('store_id')->references('id')->on('stores')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
             $table->string('property');
             $table->integer('price');
