@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('create_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
-            $table->date('start_at');
-            $table->date('end_at');
+            $table->dateTime('start_at');
+            $table->dateTime('end_at');
         });
     }
 
