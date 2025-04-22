@@ -36,22 +36,22 @@ class RegisterController extends Controller
     {
 
         $attributes = $request->validate([
-            'user' => ['required'],
+            'username' => ['required'],
             'password' => ['required', Password::min(6), 'confirmed'],
             'password_confirmation' => ['required']
         ]);
 
         $errors = [];
 
-        $user = $attributes['user'];
-        $existUser = User::where('user', $user)->exists();
+        $user = $attributes['username'];
+        $existUser = User::where('username', $user)->exists();
 
         # 確認password和confrim password是否同一個 & 名稱是否有重複使用
         if ($attributes['password'] != $attributes['password_confirmation']) {
             $errors['password'] = ['The confirmation password does not match.'];
         }
         if ($existUser) {
-            $errors['user'] = ['User has been registered, try another one.'];
+            $errors['username'] = ['User has been registered, try another one.'];
         }
 
         if (!empty($errors)) {
@@ -59,11 +59,11 @@ class RegisterController extends Controller
                 ->withErrors($errors)
                 ->withInput();
         }
-        $newUser = User::create(['user' => $user, 'password' => Hash::make($attributes['password'])]);
+        $newUser = User::create(['username' => $user, 'password' => Hash::make($attributes['password'])]);
 
         Auth::login($newUser);
         $request->session()->regenerate();
-        $request->session()->put('user', $user);
+        $request->session()->put('username', $user);
         return redirect("/");
     }
 

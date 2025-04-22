@@ -1,10 +1,10 @@
 <form id="register-form" class="auth-form" action="/register" method="POST">
     @csrf
     <div class="form-container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="user" value="{{ old('user') }}" required>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" value="{{ old('username') }}" required>
 
-        <label for="psw"><b>Password</b></label>
+        <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" value="{{ old('password') }}" required>
 
         <label for="password_confirmation"><b>Confirm Password</b></label>
@@ -18,7 +18,7 @@
         @error('password')
         <div class="text-danger">{{ $message }}</div>
         @enderror
-        @error('user')
+        @error('username')
         <div class="text-danger">{{ $message }}</div>
         @enderror
     </div>

@@ -14,7 +14,6 @@ class SessionController extends Controller
      */
     public function index()
     {
-        echo "lol.index";
         //
     }
 
@@ -32,7 +31,7 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'user' => ['required'],
+            'username' => ['required'],
             'password' => ['required']
         ]);
         if (! Auth::attempt($attributes)) {
@@ -42,7 +41,7 @@ class SessionController extends Controller
         }
 
         $request->session()->regenerate();
-        $request->session()->put('user', $attributes['user']);
+        $request->session()->put('username', $attributes['username']);
         return redirect('/');
     }
 

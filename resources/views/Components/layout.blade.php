@@ -243,7 +243,7 @@
                 <li>
                     <form method="post" action="/logout" style="display: inline; margin: 0;">
                         @csrf
-                        <button type="submit" class="logout-btn">'{{ session('user') }}'-out</button>
+                        <button type="submit" class="logout-btn">'{{ session('username') }}'-out</button>
                     </form>
                 </li>
                 @endauth
