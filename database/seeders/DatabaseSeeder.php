@@ -13,11 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $APP_ENV = env('APP_ENV');
+        
+        if($APP_ENV == 'local'){
+            User::factory(5)->create();
+        }
+        
     }
 }
