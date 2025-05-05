@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Meeting;
+use App\Models\MeetingRecord;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
@@ -26,5 +28,14 @@ class MeetingFactory extends Factory
             'start_at' => $startDay,
             'end_at' => $endDay,
         ];
+    }
+    public function configure()
+    {
+        return $this->afterCreating(function (Meeting $meeting) {
+            MeetingRecord::create([
+                'meeting_id' => $meeting->id,
+                'user_id' => $meeting->create_user_id,
+            ]);
+        });
     }
 }
