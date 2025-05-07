@@ -30,7 +30,7 @@ class RegisterController extends Controller
         $user = $attributes['username'];
         $existUser = User::where('username', $user)->exists();
 
-        # 確認password和confrim password是否同一個 & 名稱是否有重複使用
+        // 確認password和confrim password是否同一個 & 名稱是否有重複使用
         if ($attributes['password'] != $attributes['password_confirmation']) {
             $errors['password'] = ['The confirmation password does not match.'];
         }
