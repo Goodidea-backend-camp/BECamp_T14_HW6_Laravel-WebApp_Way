@@ -14,14 +14,20 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
+        $errors = [];
         $attributes = $request->validate([
             'username' => ['required'],
             'password' => ['required']
         ]);
+
         if (! Auth::attempt($attributes)) {
-            throw ValidationException::withMessages([
-                'login' => 'Sorry, the username or the password does not match.'
-            ]);
+            $errors['login'] = ['Sorry, the username or the password does not match'];
+            if (!empty($errors)) {
+                return back()
+                    ->withErrors($errors)
+                    ->withInput();
+            }
+            return redirect('/');
         }
 
         $request->session()->regenerate();
