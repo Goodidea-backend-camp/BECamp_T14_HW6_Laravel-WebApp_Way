@@ -1,6 +1,6 @@
 <x-layout>
-    <x-slot:productname>
+    <x-slot:productName>
         Login
-    </x-slot:productname>
-    <x-loginform></x-loginform>
+    </x-slot:productName>
+    <x-components.login-form></x-components.login-form>
 </x-layout>

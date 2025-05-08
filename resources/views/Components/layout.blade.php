@@ -228,7 +228,7 @@
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <i class="fas fa-music"></i>{{ $productname }}
+                    <i class="fas fa-music"></i>{{ $productName }}
                 </a>
             </div>
 

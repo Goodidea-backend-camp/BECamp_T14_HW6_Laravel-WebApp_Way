@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:productname>
+    <x-slot:productName>
         Reservation
-    </x-slot:productname>
+    </x-slot:productName>
 </x-layout>
