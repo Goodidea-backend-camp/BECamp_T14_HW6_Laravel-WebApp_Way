@@ -1,6 +1,6 @@
 <x-layout>
-    <x-slot:productname>
+    <x-slot:productName>
         DinBanDon
-    </x-slot:productname>
-    <x-bandoninfo></x-bandoninfo>
+    </x-slot:productName>
+    <x-components.bandon-info></x-components.bandon-info>
 </x-layout>

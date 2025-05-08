@@ -1,6 +1,6 @@
 <x-layout>
-    <x-slot:productname>
+    <x-slot:productName>
         MeetRoom
-    </x-slot:productname>
+    </x-slot:productName>
     <x-date></x-date>
 </x-layout>
