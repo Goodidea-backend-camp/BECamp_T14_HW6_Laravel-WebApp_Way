@@ -28,7 +28,3 @@ Route::get('/login', function () {
 });
 
 Route::post('/logout', [SessionController::class, 'destroy']);
-
-Route::get('/token', function () {
-    return csrf_token();
-});
