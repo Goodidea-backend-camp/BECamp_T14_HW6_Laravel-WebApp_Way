@@ -18,7 +18,6 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-
         $attributes = $request->validate([
             'username' => ['required'],
             'password' => ['required', Password::min(6), 'confirmed'],
