@@ -68,7 +68,7 @@ class MeetingController extends Controller
             "attendee" => ['required'],
         ]);
 
-        # 把資料寫進meetings表
+        // 把資料寫進meetings表
         $dateTime = Carbon::parse(request("date") . ' ' . request("time"));
         $user = session('username');
         $creatorId = User::where('username', $user)
@@ -80,7 +80,7 @@ class MeetingController extends Controller
             'end_at' => $dateTime->copy()->addHour(1),
         ]);
 
-        # 把資料寫進meeting_records表
+        // 把資料寫進meeting_records表
         $userIds = User::whereIn('username', request('attendee'))
             ->pluck('id')
             ->toArray();

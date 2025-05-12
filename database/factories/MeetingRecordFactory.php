@@ -22,10 +22,10 @@ class MeetingRecordFactory extends Factory
         While($meetingCollision){
             $userId = User::inRandomOrder()->first()->id;
             $bookMeetingId = Meeting::inRandomOrder()->first()->id;
-            # 拿取隨機產生的的者的所有參與會議的時間，並轉成陣列
             $allMeetings = Meeting::leftjoin('meeting_records','meetings.id','=','meeting_records.meeting_id')
                 ->where('meetings.create_user_id',$userId)
                 ->orwhere('meeting_records.user_id',$userId)
+            // 拿取隨機產生的的者的所有參與會議的時間，並轉成陣列
                 ->pluck('start_at')
                 ->toArray(); 
             $bookMeetingTime = Meeting::where('id',$bookMeetingId)->first()->start_at;
@@ -34,7 +34,7 @@ class MeetingRecordFactory extends Factory
                 $meetingCollision = False;
             }
         }
-        
+
         return [
             'meeting_id' => $bookMeetingId,
             'user_id' => $userId,
