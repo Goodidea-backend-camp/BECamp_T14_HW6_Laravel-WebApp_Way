@@ -47,7 +47,16 @@ class MeetingController extends Controller
     /**
      * Display a listing of the resourceblic function in//request)
      */
-    public function index(Request $request) {}
+    public function index(Request $request)
+    {
+        $meetings = Meeting::with('creator')
+            ->select('id', 'create_user_id', 'name', 'start_at')
+            ->simplePaginate(15);
+        $totalMeetings = Meeting::count();
+
+        // dd($meetings);
+        return view('meetroom', compact('meetings', 'totalMeetings'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -110,7 +119,7 @@ class MeetingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('components.meet-edit');
     }
 
     /**

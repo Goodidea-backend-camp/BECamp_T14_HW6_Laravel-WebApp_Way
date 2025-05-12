@@ -22,4 +22,9 @@ class Meeting extends Model
     {
         return $this->hasMany(MeetingRecord::class);
     }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'create_user_id');
+    }
 }

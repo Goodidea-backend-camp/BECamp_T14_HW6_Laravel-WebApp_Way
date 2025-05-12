@@ -57,6 +57,33 @@
         align-items: center;
         gap: 5px;
     }
+
+    .meeting-list {
+        margin: 20px 0;
+    }
+
+    .meeting-item {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 15px;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        align-items: center;
+    }
+
+    .meeting-item:last-child {
+        border-bottom: none;
+    }
+
+    .meeting-header {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 15px;
+        padding: 10px 15px;
+        background-color: #f8f9fa;
+        font-weight: bold;
+        border-bottom: 2px solid #ddd;
+    }
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -154,11 +181,31 @@
 </script>
 <div class="tab-container">
     <div class="tabs">
-        <button class="tab-button active" onclick="switchTab(event, 'employ-list-tab')">員工清單</button>
+        <button class="tab-button active" onclick="switchTab(event, 'employ-list-tab')">會議清單</button>
         <button class="tab-button" onclick="switchTab(event, 'new-appointment-tab')">新增預約</button>
     </div>
     <div id="employ-list-tab" class="tab-content active">
         <h2>會議清單</h2>
+        <div class="meeting-list">
+            <div class="meeting-header">
+                <div>會議名稱</div>
+                <div>時間</div>
+                <div>建立者</div>
+            </div>
+            @foreach ($meetings as $meeting)
+            <div class="meeting-item">
+                <div><a href="/meetings/rooms/{{ $meeting->id }}/edit">{{ $meeting->name }}</a></div>
+                <div>{{ $meeting->start_at }}</div>
+                <div>{{ $meeting->creator->username ?? '無資料' }}</div>
+            </div>
+            @endforeach
+        </div>
+        {{$meetings->links()}}
+        <div class="pagination-info">
+            <span>第 {{ $meetings->firstItem() }} 到 {{ $meetings->lastItem() }} 筆資料</span> /
+            <span>共 {{ $totalMeetings }} 筆資料</span>
+        </div>
+
     </div>
     <div id="new-appointment-tab" class="tab-content">
         <h2>新增預約</h2><br>
