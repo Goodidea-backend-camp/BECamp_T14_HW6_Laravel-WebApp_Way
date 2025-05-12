@@ -19,18 +19,18 @@ class MeetingRecordFactory extends Factory
     public function definition(): array
     {
         $meetingCollision = True;
-        While($meetingCollision){
+        while ($meetingCollision) {
             $userId = User::inRandomOrder()->first()->id;
             $bookMeetingId = Meeting::inRandomOrder()->first()->id;
-            $allMeetings = Meeting::leftjoin('meeting_records','meetings.id','=','meeting_records.meeting_id')
-                ->where('meetings.create_user_id',$userId)
-                ->orwhere('meeting_records.user_id',$userId)
             // 拿取隨機產生的的者的所有參與會議的時間，並轉成陣列
+            $allMeetings = Meeting::leftjoin('meeting_records', 'meetings.id', '=', 'meeting_records.meeting_id')
+                ->where('meetings.create_user_id', $userId)
+                ->orwhere('meeting_records.user_id', $userId)
                 ->pluck('start_at')
-                ->toArray(); 
-            $bookMeetingTime = Meeting::where('id',$bookMeetingId)->first()->start_at;
-        
-            if(!in_array($bookMeetingTime, $allMeetings)){
+                ->toArray();
+            $bookMeetingTime = Meeting::where('id', $bookMeetingId)->first()->start_at;
+
+            if (!in_array($bookMeetingTime, $allMeetings)) {
                 $meetingCollision = False;
             }
         }
