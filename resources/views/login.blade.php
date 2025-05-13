@@ -1,5 +1,6 @@
 <x-layout>
     <x-slot:productName>
-        Reservation
+        Login
     </x-slot:productName>
+    <x-components.login-form></x-components.login-form>
 </x-layout>
