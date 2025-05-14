@@ -110,6 +110,9 @@ class MeetingController extends Controller
         $meetingInfo =  Meeting::with(['creator' => function ($query) {
             $query->select('id', 'username');
         }])->where('id', $id)->first();
+        if ($meetingInfo === null) {
+            return redirect('/meetings/')->with('error', '沒有這場會議');
+        }
 
         return view('components.meet-edit', compact('meetingInfo'));
     }

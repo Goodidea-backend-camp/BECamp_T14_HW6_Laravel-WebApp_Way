@@ -179,6 +179,13 @@
         });
     }
 </script>
+
+@if(session('error'))
+<script>
+    alert("{{ session('error') }}");
+</script>
+@endif
+
 <div class="tab-container">
     <div class="tabs">
         <button class="tab-button active" onclick="switchTab(event, 'employ-list-tab')">會議清單</button>
