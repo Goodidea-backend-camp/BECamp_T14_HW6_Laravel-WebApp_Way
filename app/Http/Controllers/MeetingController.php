@@ -49,8 +49,10 @@ class MeetingController extends Controller
      */
     public function index(Request $request)
     {
-        $meetings = Meeting::with('creator')
-            ->select('id', 'create_user_id', 'name', 'start_at')
+        // 避免把user表中多餘的資訊洩出
+        $meetings = Meeting::with(['creator' => function ($query) {
+            $query->select('id', 'username');
+        }])->select('id', 'create_user_id', 'name', 'start_at')
             ->simplePaginate(15);
         $totalMeetings = Meeting::count();
 
@@ -119,7 +121,11 @@ class MeetingController extends Controller
      */
     public function edit(string $id)
     {
-        return view('components.meet-edit');
+        // 避免把user表中多餘的資訊洩出
+        $meetingInfo =  Meeting::with(['creator' => function ($query) {
+            $query->select('id', 'username');
+        }])->where('id', $id)->first();
+        return view('components.meet-edit', compact('meetingInfo'));
     }
 
     /**
