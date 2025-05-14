@@ -18,8 +18,6 @@ Route::middleware('auth')->prefix('meetings')->group(function () {
     Route::delete('{id}', [MeetingController::class, 'destroy'])->where('id', '[0-9]+');
 });
 
-
-
 Route::middleware('auth')->prefix('dinbandon')->group(function () {
     Route::get('/', function () {
         return view('bandon');
