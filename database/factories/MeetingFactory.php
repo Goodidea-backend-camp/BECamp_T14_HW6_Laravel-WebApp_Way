@@ -20,8 +20,9 @@ class MeetingFactory extends Factory
     public function definition(): array
     {
         $startDay = fake()->dateTimeBetween('-3 days', '+10 days')->setTime(rand(8, 14), 0, 0);
-        // 如果使用clone modify會去修改原本的數值，導致startDay跟endDay相等
+        // 如果沒使用clone modify會去修改原本的數值，導致startDay跟endDay相等
         $endDay = (clone $startDay)->modify('+1 hours');
+
         return [
             'create_user_id' => User::inRandomOrder()->first()->id,
             'name' => fake()->catchPhrase(),
@@ -29,6 +30,7 @@ class MeetingFactory extends Factory
             'end_at' => $endDay,
         ];
     }
+
     public function configure()
     {
         return $this->afterCreating(function (Meeting $meeting) {

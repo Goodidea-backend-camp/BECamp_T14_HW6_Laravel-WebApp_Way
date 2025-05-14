@@ -21,7 +21,7 @@ class RegisterController extends Controller
         $attributes = $request->validate([
             'username' => ['required'],
             'password' => ['required', Password::min(6), 'confirmed'],
-            'password_confirmation' => ['required']
+            'password_confirmation' => ['required'],
         ]);
 
         $errors = [];
@@ -47,6 +47,6 @@ class RegisterController extends Controller
         Auth::login($newUser);
         $request->session()->regenerate();
         $request->session()->put('username', $user);
-        return redirect("/");
+        return redirect('/');
     }
 }

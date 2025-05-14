@@ -18,7 +18,7 @@ class MeetingRecordFactory extends Factory
      */
     public function definition(): array
     {
-        $meetingCollision = True;
+        $meetingCollision = true;
         while ($meetingCollision) {
             $userId = User::inRandomOrder()->first()->id;
             $bookMeetingId = Meeting::inRandomOrder()->first()->id;

@@ -41,6 +41,7 @@ class MeetingController extends Controller
             ->pluck('username')
             ->toarray();
         $response = array_values(array_diff($response, [$request->username]));
+
         return response()->json($response);
     }
 
@@ -56,15 +57,7 @@ class MeetingController extends Controller
             ->simplePaginate(15);
         $totalMeetings = Meeting::count();
 
-        // dd($meetings);
         return view('meetroom', compact('meetings', 'totalMeetings'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -73,19 +66,19 @@ class MeetingController extends Controller
     public function store()
     {
         request()->validate([
-            "meetingName" => ['required'],
-            "date" => ['required'],
-            "time" => ['required'],
-            "attendee" => ['required'],
+            'meetingName' => ['required'],
+            'date' => ['required'],
+            'time' => ['required'],
+            'attendee' => ['required'],
         ]);
 
         // 把資料寫進meetings表
-        $dateTime = Carbon::parse(request("date") . ' ' . request("time"));
+        $dateTime = Carbon::parse(request('date') . ' ' . request('time'));
         $user = session('username');
         $creatorId = User::where('username', $user)
             ->value('id');
         $meeting = Meeting::create([
-            'name' => request("meetingName"),
+            'name' => request('meetingName'),
             'create_user_id' => $creatorId,
             'start_at' => $dateTime,
             'end_at' => $dateTime->copy()->addHour(1),
@@ -109,14 +102,6 @@ class MeetingController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -125,6 +110,7 @@ class MeetingController extends Controller
         $meetingInfo =  Meeting::with(['creator' => function ($query) {
             $query->select('id', 'username');
         }])->where('id', $id)->first();
+
         return view('components.meet-edit', compact('meetingInfo'));
     }
 
@@ -140,10 +126,10 @@ class MeetingController extends Controller
             $validate = $request->all();
             $meeting->update($validate);
         } else {
-            return redirect("/meetings/" . $id . "/edit")->with("error", "你不是會議創建者無權更動");
+            return redirect('/meetings/' . $id . '/edit')->with('error', '你不是會議創建者無權更動');
         }
 
-        return redirect("/meetings/" . $id . "/edit")->with("message", "Update successful");
+        return redirect('/meetings/' . $id . '/edit')->with('message', 'Update successful');
     }
 
     /**
@@ -157,9 +143,9 @@ class MeetingController extends Controller
         if ($userId === $meeting->create_user_id) {
             $meeting->delete();
         } else {
-            return redirect("/meetings/" . $id . "/edit")->with("error", "你不是會議創建者無權更動");
+            return redirect('/meetings/' . $id . '/edit')->with('error', '你不是會議創建者無權更動');
         }
 
-        return redirect("/meetings")->with("message", "Delete successful");
+        return redirect('/meetings')->with('message', 'Delete successful');
     }
 }
