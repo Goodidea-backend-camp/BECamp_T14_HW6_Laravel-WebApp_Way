@@ -12,10 +12,10 @@ Route::get('/', function () {
 
 Route::middleware('auth')->prefix('meetings')->group(function () {
     Route::get('/', [MeetingController::class, 'index']);
+    Route::get('{id}/edit', [MeetingController::class, 'edit'])->where('id', '[0-9]+');
     Route::post('/', [MeetingController::class, 'store']);
-    Route::get('rooms/', function () {
-        return view('login');
-    });
+    Route::patch('{id}', [MeetingController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('{id}', [MeetingController::class, 'destroy'])->where('id', '[0-9]+');
 });
 
 

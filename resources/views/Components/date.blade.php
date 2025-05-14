@@ -194,7 +194,7 @@
             </div>
             @foreach ($meetings as $meeting)
             <div class="meeting-item">
-                <div><a href="/meetings/rooms/{{ $meeting->id }}/edit">{{ $meeting->name }}</a></div>
+                <div><a href="/meetings/{{ $meeting->id }}/edit">{{ $meeting->name }}</a></div>
                 <div>{{ $meeting->start_at }}</div>
                 <div>{{ $meeting->creator->username ?? '無資料' }}</div>
             </div>
