@@ -132,7 +132,7 @@
 
     function showAvaiableTime() {
         $.ajax({
-            url: "api/bookmeeting",
+            url: "api/meetings/availability",
             type: "POST",
             data: JSON.stringify({
                 "date": $('#dateInput').val(),
@@ -155,7 +155,7 @@
 
     function showAvaiablePeople() {
         $.ajax({
-            url: "api/avaiablepeople",
+            url: "api/people/availability",
             type: "POST",
             data: JSON.stringify({
                 "date": $('#dateInput').val(),
