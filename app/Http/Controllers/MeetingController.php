@@ -133,14 +133,33 @@ class MeetingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $meeting = Meeting::find($id);
+        $userId = $request->user()->id;
+
+        if ($userId === $meeting->create_user_id) {
+            $validate = $request->all();
+            $meeting->update($validate);
+        } else {
+            return redirect("/meetings/" . $id . "/edit")->with("error", "你不是會議創建者無權更動");
+        }
+
+        return redirect("/meetings/" . $id . "/edit")->with("message", "Update successful");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $meeting = Meeting::find($id);
+        $userId = $request->user()->id;
+
+        if ($userId === $meeting->create_user_id) {
+            $meeting->delete();
+        } else {
+            return redirect("/meetings/" . $id . "/edit")->with("error", "你不是會議創建者無權更動");
+        }
+
+        return redirect("/meetings")->with("message", "Delete successful");
     }
 }
