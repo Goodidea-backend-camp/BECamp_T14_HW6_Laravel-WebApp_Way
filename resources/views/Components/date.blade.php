@@ -106,9 +106,9 @@
         const dateInput = document.getElementById('dateInput');
         const today = new Date();
         const year = today.getFullYear();
-        const mounth = String(today.getMonth() + 1).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
-        const minDate = `${year}-${mounth}-${day}`;
+        const minDate = `${year}-${month}-${day}`;
         dateInput.min = minDate;
     }
 
