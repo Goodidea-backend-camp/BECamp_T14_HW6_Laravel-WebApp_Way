@@ -233,8 +233,10 @@
             </div>
 
             <ul class="menu">
+                @auth
                 <li><a href="/dinbandon">DingBanDon</a></li>
-                <li><a href="/meetroom">MeetingRoom</a></li>
+                <li><a href="/meetings">MeetingRoom</a></li>
+                @endauth
                 @guest
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
