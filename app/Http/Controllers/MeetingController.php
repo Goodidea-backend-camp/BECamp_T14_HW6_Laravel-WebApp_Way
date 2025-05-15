@@ -76,6 +76,10 @@ class MeetingController extends Controller
 
         // 把資料寫進meetings表
         $dateTime = Carbon::parse(request('date') . ' ' . request('time'));
+        $now = Carbon::now()->format('Y-m-d\TH:i');
+        if($dateTime<$now){
+            return redirect('/meetings')->with('error', '你的時間不可以低於現在');
+        }
         $user = session('username');
         $creatorId = User::where('username', $user)
             ->value('id');
@@ -126,10 +130,14 @@ class MeetingController extends Controller
     {
         $meeting = Meeting::find($id);
         $userId = $request->user()->id;
+        $now = Carbon::now()->format('Y-m-d\TH:i');
+        
+        if($request->start_at<$now){
+            return redirect('/meetings/' . $id . '/edit')->with('error', '你的時間不可以低於現在');
+        }
         if ($request->start_at > $request->end_at) {
             return redirect('/meetings/' . $id . '/edit')->with('error', '開始時間不能大於結束時間');
         }
-
 
         if ($userId === $meeting->create_user_id) {
             $validate = $request->all();
