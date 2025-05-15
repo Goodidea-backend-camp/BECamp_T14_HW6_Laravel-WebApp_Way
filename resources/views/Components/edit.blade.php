@@ -99,6 +99,11 @@
         alert("{{ session('error') }}");
     @endif
 </script>
+
+@php
+    $now = \Carbon\Carbon::now()->format('Y-m-d\TH:i');
+@endphp
+
 <div class="form-container">
     <h2>會議表單</h2>
     <form id="meetingForm" action="/meetings/{{ $meetingInfo->id }}" method="POST">
@@ -112,10 +117,10 @@
         <input type="text" id="organizer" name="create_user" value="{{$meetingInfo->creator->username}}" disabled="disabled" required>
 
         <label for="start_at">會議開始時間</label>
-        <input type="datetime-local" id="startTime" name="start_at" value="{{$meetingInfo->start_at}}" required>
+        <input type="datetime-local" id="startTime" name="start_at" min="{{ $now }}" value="{{$meetingInfo->start_at}}" required>
 
         <label for="end_at">會議結束時間</label>
-        <input type="datetime-local" id="endTime" name="end_at" value="{{$meetingInfo->end_at}}" required>
+        <input type="datetime-local" id="endTime" name="end_at" min="{{ $now }}" value="{{$meetingInfo->end_at}}" required>
         @if(session('username') == $meetingInfo->creator->username)
         <div class="button-group">
             <button class="save" type="submit" onclick="setMethod('PATCH')">保存</button>
