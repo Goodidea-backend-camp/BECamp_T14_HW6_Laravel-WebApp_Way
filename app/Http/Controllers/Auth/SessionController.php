@@ -27,6 +27,7 @@ class SessionController extends Controller
                     ->withErrors($errors)
                     ->withInput();
             }
+            
             return redirect('/');
         }
 

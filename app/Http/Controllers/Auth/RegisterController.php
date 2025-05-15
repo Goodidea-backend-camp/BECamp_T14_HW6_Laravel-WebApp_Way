@@ -47,6 +47,7 @@ class RegisterController extends Controller
         Auth::login($newUser);
         $request->session()->regenerate();
         $request->session()->put('username', $user);
+        
         return redirect('/');
     }
 }
