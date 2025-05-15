@@ -68,8 +68,19 @@
     }
 </style>
 
-
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('meetingForm').addEventListener('submit', function(e) {
+            const start = document.getElementById('startTime').value;
+            const end = document.getElementById('endTime').value;
+
+            if (start && end && new Date(start) > new Date(end)) {
+                e.preventDefault();
+                alert('開始時間不能大於結束時間');
+            }
+        });
+    });
+
     function setMethod(method) {
         document.getElementById('methodInput').value = method;
     }

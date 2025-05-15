@@ -126,6 +126,10 @@ class MeetingController extends Controller
     {
         $meeting = Meeting::find($id);
         $userId = $request->user()->id;
+        if ($request->start_at > $request->end_at) {
+            return redirect('/meetings/' . $id . '/edit')->with('error', '開始時間不能大於結束時間');
+        }
+
 
         if ($userId === $meeting->create_user_id) {
             $validate = $request->all();
