@@ -57,7 +57,7 @@ class MeetingController extends Controller
         }])->select('id', 'create_user_id', 'name', 'start_at')
             ->where('start_at', '>', $today)
             ->simplePaginate(15);
-        $totalMeetings = Meeting::count();
+        $totalMeetings = $meetings->count();
 
         return view('meetroom', compact('meetings', 'totalMeetings'));
     }
