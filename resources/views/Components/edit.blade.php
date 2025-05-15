@@ -92,17 +92,13 @@
         }
         return false;
     }
-</script>
 
-@if(session('message'))
-<script>
-    alert("{{ session('message') }}");
+    @if(session('message'))
+        alert("{{ session('message') }}");
+    @elseif(session('error'))
+        alert("{{ session('error') }}");
+    @endif
 </script>
-@elseif(session('error'))
-<script>
-    alert("{{ session('error') }}");
-</script>
-@endif
 <div class="form-container">
     <h2>會議表單</h2>
     <form id="meetingForm" action="/meetings/{{ $meetingInfo->id }}" method="POST">

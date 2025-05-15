@@ -178,13 +178,11 @@
             }
         });
     }
+    
+    @if(session('error'))
+        alert("{{ session('error') }}");
+    @endif
 </script>
-
-@if(session('error'))
-<script>
-    alert("{{ session('error') }}");
-</script>
-@endif
 
 <div class="tab-container">
     <div class="tabs">
