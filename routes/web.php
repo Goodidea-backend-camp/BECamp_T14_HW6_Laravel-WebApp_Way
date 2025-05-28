@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Contracts\Session\Session;
 
 Route::get('/', function () {
@@ -22,6 +23,7 @@ Route::middleware('auth')->prefix('dinbandon')->group(function () {
     Route::get('/', function () {
         return view('bandon');
     });
+    Route::apiResource('stores', StoreController::class)->only(['index', 'show', 'store']);
 });
 
 Route::get('/register', function () {
