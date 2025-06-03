@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace App\Repositories;
 
@@ -15,6 +15,6 @@ class StoreRepository implements StoreRepositoryInterface
 
     public function create(array $data)
     {
-        // return Store::create($data);
+        return Store::create($data);
     }
 }

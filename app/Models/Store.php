@@ -9,4 +9,16 @@ class Store extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+        'phone',
+        'address',
+        'description',
+    ];
+
+    public function menu()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

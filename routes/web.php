@@ -23,6 +23,9 @@ Route::middleware('auth')->prefix('dinbandon')->group(function () {
     Route::get('/', function () {
         return view('bandon');
     });
+    Route::get('addstores', function () {
+        return view('add-store');
+    });
     Route::apiResource('stores', StoreController::class)->only(['index', 'show', 'store']);
 });
 

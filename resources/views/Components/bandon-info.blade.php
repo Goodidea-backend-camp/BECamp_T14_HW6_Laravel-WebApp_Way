@@ -102,7 +102,116 @@
         color: #666;
         padding: 20px;
     }
+
+    .store-info-section {
+        background-color: #f8f9fa;
+        padding: 25px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .store-info-title {
+        font-size: 1.8em;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .store-info-content {
+        display: grid;
+        gap: 15px;
+    }
+
+    .store-info-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .store-info-label {
+        font-weight: 600;
+        color: #666;
+        min-width: 80px;
+    }
+
+    .store-info-value {
+        color: #333;
+    }
+
+    .store-description {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        border-left: 4px solid #3498db;
+    }
+
+    .menu-section {
+        margin-top: 30px;
+    }
+
+    .menu-title {
+        font-size: 1.5em;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .menu-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-table th {
+        background-color: #f8f9fa;
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #2c3e50;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .menu-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #dee2e6;
+        color: #333;
+    }
+
+    .menu-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .menu-table tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .menu-name {
+        font-weight: 500;
+        color: #2c3e50;
+    }
+
+    .menu-property {
+        color: #666;
+    }
+
+    .menu-price {
+        font-weight: 500;
+        color: #e74c3c;
+        text-align: right;
+    }
 </style>
+
+<script>
+    @if(session('success'))
+    alert("{{ session('success') }}");
+    @endif
+</script>
 
 @if(isset($stores) && $stores->isNotEmpty())
 <div class="stores-container">
@@ -120,6 +229,50 @@
     </div>
     <div class="pagination-container">
         {{ $stores->links('pagination::bootstrap-4')  }}
+    </div>
+</div>
+@elseif(isset($storeInfo) && isset($menus) && $storeInfo && $menus->isNotEmpty())
+<div class="stores-container">
+    <div class="store-info-section">
+        <h1 class="store-info-title">{{ $storeInfo->name }}</h1>
+        <div class="store-info-content">
+            <div class="store-info-item">
+                <span class="store-info-label">電話：</span>
+                <span class="store-info-value">{{ $storeInfo->phone }}</span>
+            </div>
+            <div class="store-info-item">
+                <span class="store-info-label">地址：</span>
+                <span class="store-info-value">{{ $storeInfo->address }}</span>
+            </div>
+            @if($storeInfo->description)
+            <div class="store-description">
+                <div class="store-info-label">店家介紹：</div>
+                <div class="store-info-value">{{ $storeInfo->description }}</div>
+            </div>
+            @endif
+        </div>
+    </div>
+
+    <div class="menu-section">
+        <h2 class="menu-title">菜單列表</h2>
+        <table class="menu-table">
+            <thead>
+                <tr>
+                    <th>品項名稱</th>
+                    <th>份量</th>
+                    <th style="text-align: right;">價格</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($menus as $menu)
+                <tr>
+                    <td class="menu-name">{{ $menu->name }}</td>
+                    <td class="menu-property">{{ $menu->property }}</td>
+                    <td class="menu-price">$ {{ $menu->price ?? '無資料' }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 @else

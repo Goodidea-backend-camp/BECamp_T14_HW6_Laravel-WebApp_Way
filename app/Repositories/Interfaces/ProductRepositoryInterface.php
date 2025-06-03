@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Interfaces;
 
-interface StoreRepositoryInterface
+interface ProductRepositoryInterface
 {
     public function all();
     public function create(array $data);
+    public function createMany(array $data);
 }
