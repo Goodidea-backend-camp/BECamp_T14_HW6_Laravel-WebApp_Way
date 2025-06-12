@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Repositories\Interfaces\OrderRecordRepositoryInterface;
+use App\Repositories\Interfaces\OrderRepositoryInterface;
 use App\Repositories\Interfaces\StoreRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
+use App\Repositories\OrderRecordRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\StoreRepository;
 use Illuminate\Support\Facades\Blade;
@@ -18,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(StoreRepositoryInterface::class, StoreRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,  ProductRepository::class);
+        $this->app->bind(OrderRepositoryInterface::class,  OrderRepository::class);
+        $this->app->bind(OrderRecordRepositoryInterface::class,  OrderRecordRepository::class);
     }
 
     /**
@@ -29,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.login-form', 'components.login-form');
         Blade::component('components.register-form', 'components.register-form');
         Blade::component('components.bandon-form', 'components.bandon-form');
+        Blade::component('components.bandon-order', 'components.bandon-order');
     }
 }

@@ -24,18 +24,19 @@ class StoreService
         return $this->storeRepository->all();
     }
 
-    public function getStore($id)
+    public function getStore(int $storeId)
     {
-        $store = Store::select('name', 'phone', 'address', 'description')->where('id', $id)->first();
-
-        return $store;
+        return $this->storeRepository->getStoreInfofByStoreId($storeId);
     }
 
-    public function getMenu($id)
+    public function getStoresByIds(array $id)
     {
-        $menus = Product::select('id', 'name', 'property', 'price')->where('store_id', $id)->orderBy('name')->get();
+        return $this->storeRepository->getByIds($id);
+    }
 
-        return $menus;
+    public function getMenu(int $storeId)
+    {
+        return  $this->storeRepository->getMenuByStoreId($storeId);;
     }
 
     public function createStore(array $data)

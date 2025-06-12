@@ -213,6 +213,10 @@
     @endif
 </script>
 
+@php
+$hasAnyContent = false;
+@endphp
+
 @if(isset($stores) && $stores->isNotEmpty())
 <div class="stores-container">
     <h1 class="stores-title">商店清單</h1>
@@ -231,23 +235,25 @@
         {{ $stores->links('pagination::bootstrap-4')  }}
     </div>
 </div>
+@php $hasAnyContent = true; @endphp
 @elseif(isset($storeInfo) && isset($menus) && $storeInfo && $menus->isNotEmpty())
+@php $info = $storeInfo->first();@endphp
 <div class="stores-container">
     <div class="store-info-section">
-        <h1 class="store-info-title">{{ $storeInfo->name }}</h1>
+        <h1 class="store-info-title">{{ $info['name'] }}</h1>
         <div class="store-info-content">
             <div class="store-info-item">
                 <span class="store-info-label">電話：</span>
-                <span class="store-info-value">{{ $storeInfo->phone }}</span>
+                <span class="store-info-value">{{ $info['phone'] }}</span>
             </div>
             <div class="store-info-item">
                 <span class="store-info-label">地址：</span>
-                <span class="store-info-value">{{ $storeInfo->address }}</span>
+                <span class="store-info-value">{{ $info['address'] }}</span>
             </div>
-            @if($storeInfo->description)
+            @if($info['description'])
             <div class="store-description">
                 <div class="store-info-label">店家介紹：</div>
-                <div class="store-info-value">{{ $storeInfo->description }}</div>
+                <div class="store-info-value">{{ $info['description'] }}</div>
             </div>
             @endif
         </div>
@@ -266,15 +272,55 @@
             <tbody>
                 @foreach ($menus as $menu)
                 <tr>
-                    <td class="menu-name">{{ $menu->name }}</td>
-                    <td class="menu-property">{{ $menu->property }}</td>
-                    <td class="menu-price">$ {{ $menu->price ?? '無資料' }}</td>
+                    <td class="menu-name">{{ $menu['name'] }}</td>
+                    <td class="menu-property">{{ $menu['property'] }}</td>
+                    <td class="menu-price">$ {{ $menu['price'] ?? '無資料' }}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
-@else
-<p class="no-stores">目前沒有店家資料</p>
+@php $hasAnyContent = true; @endphp
+@endif
+
+@if(isset($ownOrders) && $ownOrders->isNotEmpty())
+<div class="stores-container">
+    <h1 class="stores-title">{{ session('username') }} 開的團購單</h1>
+    <div class="stores-list">
+        @foreach ($ownOrders as $order)
+        <a href="/dinbandon/orders/{{ $order['order_id'] }}">
+            <div class="stores-item">
+                <div class="store-name">{{ $order['name'] }}</div>
+                <div class="store-phone">{{ $order['phone'] }}</div>
+                <div class="store-address">{{ $order['address'] ?? '無資料' }}</div>
+                <div class="store-address">結束時間：{{ $order['end_at'] ?? '無資料' }}</div>
+            </div>
+        </a>
+        @endforeach
+    </div>
+</div>
+@php $hasAnyContent = true; @endphp
+@endif
+@if(isset($orders) && $orders->isNotEmpty())
+<div class="stores-container">
+    <h1 class="stores-title">{{ session('username') }} 的團購單</h1>
+    <div class="stores-list">
+        @foreach ($orders as $order)
+        <a href="/dinbandon/orders/{{ $order['order_id'] }}">
+            <div class="stores-item">
+                <div class="store-name">{{ $order['name'] }}</div>
+                <div class="store-phone">{{ $order['phone'] }}</div>
+                <div class="store-address">{{ $order['address'] ?? '無資料' }}</div>
+                <div class="store-address">結束時間：{{ $order['end_at'] ?? '無資料' }}</div>
+            </div>
+        </a>
+        @endforeach
+    </div>
+</div>
+@php $hasAnyContent = true; @endphp
+@endif
+
+@if($hasAnyContent === false)
+<p class="no-stores">目前沒有資料</p>
 @endif
