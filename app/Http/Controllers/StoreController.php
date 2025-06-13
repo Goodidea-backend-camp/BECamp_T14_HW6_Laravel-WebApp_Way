@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Http\Requests\StoreRequest;
+use App\Http\Requests\StoreRequest;
 use App\Models\Product;
 use App\Services\StoreService;
 use Illuminate\Http\Request;
