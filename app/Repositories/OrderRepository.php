@@ -57,8 +57,8 @@ class OrderRepository implements OrderRepositoryInterface
 
         if ($isOrderOwner) {
             $allOrderRecords = OrderRecord::where('order_id', $orderId)
-                ->with('product:id,name', 'user:id,username') // 确保这里是 'username'
-                ->select('product_id', 'number', 'total_price', 'is_paid', 'description', 'user_id')
+                ->with('product:id,name,property', 'user:id,username') // 确保这里是 'username'
+                ->select('product_id', 'number', 'total_price', 'is_paid', 'description', 'user_id', 'product.property')
                 ->get();
 
             // 过滤出订单拥有者自己的记录
@@ -71,6 +71,7 @@ class OrderRepository implements OrderRepositoryInterface
                     'total_price' => $orderRecord->total_price,
                     'is_paid' => $orderRecord->is_paid,
                     'description' => $orderRecord->description,
+                    'property' => $orderRecord->product->property,
                 ];
             });
 
@@ -85,6 +86,7 @@ class OrderRepository implements OrderRepositoryInterface
                     'total_price' => $orderRecord->total_price,
                     'is_paid' => $orderRecord->is_paid,
                     'description' => $orderRecord->description,
+                    'property' => $orderRecord->product->property,
                 ];
             });
 
@@ -96,7 +98,7 @@ class OrderRepository implements OrderRepositoryInterface
             // 如果用户不是订单拥有者，只返回该用户的记录
             $myOrderRecords = OrderRecord::where('order_id', $orderId)
                 ->where('user_id', $userId)
-                ->with('product:id,name')
+                ->with('product:id,name,property')
                 ->select('product_id', 'number', 'total_price', 'is_paid', 'description')
                 ->get()
                 ->map(function ($orderRecord) {
@@ -107,6 +109,7 @@ class OrderRepository implements OrderRepositoryInterface
                         'total_price' => $orderRecord->total_price,
                         'is_paid' => $orderRecord->is_paid,
                         'description' => $orderRecord->description,
+                        'property' => $orderRecord->product->property,
                     ];
                 });
             return [

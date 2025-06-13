@@ -271,6 +271,7 @@ $hasAnyContent = false;
                         <th>數量</th>
                         <th>總價格</th>
                         <th>是否已付款</th>
+                        <th>份量</th>
                         <th>備註</th>
                     </tr>
                 </thead>
@@ -287,18 +288,18 @@ $hasAnyContent = false;
                             <input type="hidden" name="orders[{{ $record['id'] }}][is_paid]" value="{{ $record['is_paid'] ? 1 : 0 }}">
                             {{ $record['is_paid'] ? '是' : '否' }}
                         </td>
+                        <td>{{ $record['property'] ?? '無資料' }}</td>
                         <td class="menu-property">
                             <input type="text" name="orders[{{ $record['id'] }}][description]" value="{{ $record['description'] }}" class="form-control">
                         </td>
                         <input type="hidden" name="orders[{{ $record['id'] }}][id]" value="{{ $record['id'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][product_name]" value="{{ $record['product_name'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][total_price]" value="{{ $record['total_price'] }}">
-                        <input type="hidden" name="orders[{{ $record['id'] }}][product_property]" value="{{ $record['product_property'] ?? '' }}">
                     </tr>
                     @endforeach
                     @else
                     <tr>
-                        <td colspan="5" style="text-align: center;">目前沒有您的訂單</td>
+                        <td colspan="6" style="text-align: center;">目前沒有您的訂單</td>
                     </tr>
                     @endif
                 </tbody>
@@ -543,6 +544,7 @@ $hasAnyContent = false;
                                 <input type="hidden" name="orders[${tempOrderId}][is_paid]" value="0">
                                 否
                             </td>
+                            <td>${productProperty}</td>
                             <td class="menu-property">
                                 <input type="text" name="orders[${tempOrderId}][description]" value="${safeDescription}" class="form-control">
                             </td>
@@ -553,7 +555,7 @@ $hasAnyContent = false;
                         `;
 
                         // 檢查是否有「目前沒有您的訂單」的提示行，如果有則移除
-                        const noOrderRow = myOrdersTbody.querySelector('tr > td[colspan="5"]');
+                        const noOrderRow = myOrdersTbody.querySelector('tr > td[colspan="6"]');
                         if (noOrderRow) {
                             noOrderRow.closest('tr').remove();
                         }
