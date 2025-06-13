@@ -295,6 +295,7 @@ $hasAnyContent = false;
                         <input type="hidden" name="orders[{{ $record['id'] }}][id]" value="{{ $record['id'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][product_name]" value="{{ $record['product_name'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][total_price]" value="{{ $record['total_price'] }}">
+                        <input type="hidden" name="orders[{{ $record['id'] }}][product_property]" value="{{ $record['property'] }}">
                     </tr>
                     @endforeach
                     @else
