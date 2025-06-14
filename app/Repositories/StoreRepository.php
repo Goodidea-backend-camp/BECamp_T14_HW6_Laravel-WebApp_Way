@@ -10,7 +10,7 @@ class StoreRepository implements StoreRepositoryInterface
 {
     public function all()
     {
-        $stores = Store::Paginate(10);;
+        $stores = Store::Paginate(10);
         return $stores;
     }
 

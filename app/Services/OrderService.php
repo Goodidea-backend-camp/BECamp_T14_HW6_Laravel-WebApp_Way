@@ -73,4 +73,9 @@ class OrderService
 
         $this->orderRecordRepository->create($updateData);
     }
+
+    public function storeGroupOrder(object $updateData, int $userId)
+    {
+        return $this->orderRepository->create($updateData, $userId);
+    }
 }

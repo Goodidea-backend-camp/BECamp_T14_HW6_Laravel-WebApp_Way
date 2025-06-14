@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GroupOrderRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\User;
 use App\Services\OrderService;
@@ -42,22 +43,12 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(OrderRequest $request)
+    public function store(GroupOrderRequest $request)
     {
-        $validatedData = $request->validated();
-        $orderId = $validatedData['order_id'];
-        $storeId = $validatedData['store_id'];
         $userId = $request->user()->id;
-        $orders = collect($validatedData['orders']);
+        $this->orderService->storeGroupOrder($request, $userId);
 
-        [$numericOrders, $tempOrders] = $orders->partition(function ($order) {
-            return is_numeric($order['id']);
-        });
-
-        $originalOrders = $this->orderService->updateOriginOrder($userId, $orderId, $numericOrders);
-        $newOrders = $this->orderService->storeNewOrder($userId, $orderId, $storeId, $tempOrders);
-
-        return view('welcome');
+        return redirect('/dinbandon/orders');
     }
 
     /**
@@ -85,9 +76,22 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(OrderRequest $request, string $id)
     {
-        //
+        $validatedData = $request->validated();
+        $orderId = $validatedData['order_id'];
+        $storeId = $validatedData['store_id'];
+        $userId = $request->user()->id;
+        $orders = collect($validatedData['orders']);
+
+        [$numericOrders, $tempOrders] = $orders->partition(function ($order) {
+            return is_numeric($order['id']);
+        });
+
+        $originalOrders = $this->orderService->updateOriginOrder($userId, $orderId, $numericOrders);
+        $newOrders = $this->orderService->storeNewOrder($userId, $orderId, $storeId, $tempOrders);
+
+        return redirect('/dinbandon/orders/' . $orderId);
     }
 
     /**
@@ -96,5 +100,12 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function storeInfo()
+    {
+        $stores = $this->storeService->getAllStores();
+
+        return view('add-order', compact('stores'));
     }
 }

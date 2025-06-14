@@ -260,8 +260,9 @@ $hasAnyContent = false;
     @if(isset($responseData['userOrder']))
     <div class="menu-section">
         <h2 class="menu-title">我的訂購</h2>
-        <form action="/dinbandon/orders/" method="POST">
+        <form action="/dinbandon/orders/{{ $responseData['order_id'] }}" method="POST">
             @csrf
+            @method('PATCH')
             <input type="hidden" name="order_id" value="{{ $responseData['order_id'] ?? null}}">
             <input type="hidden" name="store_id" value="{{ $responseData['store_id'] }}">
             <table class="menu-table" id="myOrdersTable">

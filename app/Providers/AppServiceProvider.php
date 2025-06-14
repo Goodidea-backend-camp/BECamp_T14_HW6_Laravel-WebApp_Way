@@ -36,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('components.register-form', 'components.register-form');
         Blade::component('components.bandon-form', 'components.bandon-form');
         Blade::component('components.bandon-order', 'components.bandon-order');
+        Blade::component('components.bandon-orderlist', 'components.bandon-orderlist');
     }
 }

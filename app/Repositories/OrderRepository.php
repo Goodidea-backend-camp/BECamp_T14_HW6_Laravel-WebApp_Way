@@ -9,6 +9,15 @@ use Illuminate\Support\Collection;
 
 class OrderRepository implements OrderRepositoryInterface
 {
+    public function create(object $updateData, int $userId)
+    {
+        return Order::create([
+            'store_id' => $updateData->store_id,
+            'create_user_id' => $userId,
+            'created_at' => $updateData->start_time,
+            'end_at' => $updateData->end_time,
+        ]);
+    }
     public function findManagedOrdersInfoByUserId(int $userId): Collection
     {
         return Order::where('create_user_id', $userId)
