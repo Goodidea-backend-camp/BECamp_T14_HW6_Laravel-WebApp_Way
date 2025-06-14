@@ -11,6 +11,16 @@ class OrderRecord extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = [
+        'order_id',
+        'user_id',
+        'product_id',
+        'number',
+        'total_price',
+        'is_paid',
+        'description',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');

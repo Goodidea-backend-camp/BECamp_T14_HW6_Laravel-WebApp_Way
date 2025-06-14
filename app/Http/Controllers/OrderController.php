@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderRequest;
 use App\Models\User;
 use App\Services\OrderService;
 use App\Services\StoreService;
@@ -41,9 +42,22 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        dd($request);
+        $validatedData = $request->validated();
+        $orderId = $validatedData['order_id'];
+        $storeId = $validatedData['store_id'];
+        $userId = $request->user()->id;
+        $orders = collect($validatedData['orders']);
+
+        [$numericOrders, $tempOrders] = $orders->partition(function ($order) {
+            return is_numeric($order['id']);
+        });
+
+        $originalOrders = $this->orderService->updateOriginOrder($userId, $orderId, $numericOrders);
+        $newOrders = $this->orderService->storeNewOrder($userId, $orderId, $storeId, $tempOrders);
+
+        return view('welcome');
     }
 
     /**

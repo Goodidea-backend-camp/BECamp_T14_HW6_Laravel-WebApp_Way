@@ -22,4 +22,12 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::insert($data);
     }
+
+    public function getProductId(int $storeId, string $productName, string $productProperty)
+    {
+        return Product::where('store_id', $storeId)
+            ->where('name', $productName)
+            ->where('property', $productProperty)
+            ->value('id');
+    }
 }

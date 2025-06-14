@@ -20,6 +20,15 @@ class OrderRecordRepository implements OrderRecordRepositoryInterface
 
     public function create(array $data)
     {
-        return OrderRecord::create($data);
+        return OrderRecord::insert($data);
+    }
+
+    public function update(array $data)
+    {
+        return OrderRecord::upsert(
+            $data,
+            ['order_id', 'user_id', 'product_id', 'description'],
+            ['number', 'total_price', 'is_paid']
+        );
     }
 }
