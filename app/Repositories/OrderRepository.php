@@ -57,8 +57,8 @@ class OrderRepository implements OrderRepositoryInterface
 
         if ($isOrderOwner) {
             $allOrderRecords = OrderRecord::where('order_id', $orderId)
-                ->with('product:id,name,property', 'user:id,username') // 确保这里是 'username'
-                ->select('product_id', 'number', 'total_price', 'is_paid', 'description', 'user_id', 'product.property')
+                ->with('product:id,name,property', 'user:id,username')
+                ->select('product_id', 'number', 'total_price', 'is_paid', 'description', 'user_id')
                 ->get();
 
             // 过滤出订单拥有者自己的记录
@@ -66,6 +66,7 @@ class OrderRepository implements OrderRepositoryInterface
                 return $record->user_id === $userId;
             })->map(function ($orderRecord) {
                 return [
+                    'id' => $orderRecord->product_id,
                     'product_name' => $orderRecord->product->name,
                     'number' => $orderRecord->number,
                     'total_price' => $orderRecord->total_price,
@@ -80,6 +81,7 @@ class OrderRepository implements OrderRepositoryInterface
                 return $record->user_id !== $userId;
             })->map(function ($orderRecord) {
                 return [
+                    'id' => $orderRecord->product_id,
                     'user_name' => $orderRecord->user->username,
                     'product_name' => $orderRecord->product->name,
                     'number' => $orderRecord->number,
@@ -112,6 +114,7 @@ class OrderRepository implements OrderRepositoryInterface
                         'property' => $orderRecord->product->property,
                     ];
                 });
+
             return [
                 'myOrderRecords' => $myOrderRecords,
             ];
