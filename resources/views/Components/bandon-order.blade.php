@@ -290,13 +290,12 @@ $hasAnyContent = false;
                             {{ $record['is_paid'] ? '是' : '否' }}
                         </td>
                         <td>{{ $record['property'] ?? '無資料' }}</td>
-                        <td class="menu-property">
-                            <input type="text" name="orders[{{ $record['id'] }}][description]" value="{{ $record['description'] }}" class="form-control">
-                        </td>
+                        <td class="menu-property">{{ $record['description'] ?? '無備註' }}</td>
                         <input type="hidden" name="orders[{{ $record['id'] }}][id]" value="{{ $record['id'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][product_name]" value="{{ $record['product_name'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][total_price]" value="{{ $record['total_price'] }}">
                         <input type="hidden" name="orders[{{ $record['id'] }}][product_property]" value="{{ $record['property'] }}">
+                        <input type="hidden" name="orders[{{ $record['id'] }}][description]" value="{{ $record['description'] }}">
                     </tr>
                     @endforeach
                     @else

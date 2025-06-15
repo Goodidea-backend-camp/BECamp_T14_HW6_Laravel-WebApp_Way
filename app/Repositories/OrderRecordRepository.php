@@ -25,10 +25,19 @@ class OrderRecordRepository implements OrderRecordRepositoryInterface
 
     public function update(array $data)
     {
-        return OrderRecord::upsert(
-            $data,
-            ['order_id', 'user_id', 'product_id', 'description'],
-            ['number', 'total_price', 'is_paid']
-        );
+        foreach ($data as $item) {
+            OrderRecord::where([
+                'order_id' => $item['order_id'],
+                'user_id' => $item['user_id'],
+                'product_id' => $item['product_id'],
+                'description' => $item['description'],
+            ])->update([
+                'number' => $item['number'],
+                'total_price' => $item['total_price'],
+                'is_paid' => $item['is_paid'],
+                'description' => $item['description']
+            ]);
+        }
+        return true;
     }
 }

@@ -50,7 +50,7 @@ class OrderService
                 'number' => $item['number'],
                 'total_price' => $item['total_price'],
                 'is_paid' => $item['is_paid'],
-                'description' => $item['description'],
+                'description' => $item['description'] ?? '',
             ];
         }
         $this->orderRecordRepository->update($updateData);
@@ -67,7 +67,7 @@ class OrderService
                 'number' => $item['number'],
                 'total_price' => $item['total_price'],
                 'is_paid' => $item['is_paid'],
-                'description' => $item['description'],
+                'description' => $item['description'] ?? '',
             ];
         }
 
