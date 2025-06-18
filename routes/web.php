@@ -23,6 +23,9 @@ Route::middleware('auth')->prefix('meetings')->group(function () {
 Route::middleware('auth')->prefix('dinbandon')->group(function () {
     Route::get('/', [OrderController::class, 'index']);
     Route::get('addorders', [OrderController::class, 'storeInfo']);
+    Route::get('addstores', function () {
+        return view('add-store');
+    });
     Route::apiResource('stores', StoreController::class)->only(['index', 'show', 'store']);
     Route::apiResource('orders', OrderController::class)->only(['index', 'show', 'store']);
     Route::patch('orders/{id}', [OrderController::class, 'update'])->where('id', '[0-9]+');
