@@ -120,7 +120,7 @@ class MeetingController extends Controller
             return redirect('/meetings/')->with('error', '沒有這場會議');
         }
 
-        return view('components.meet-edit', compact('meetingInfo'));
+        return view('meet-edit', compact('meetingInfo'));
     }
 
     /**
