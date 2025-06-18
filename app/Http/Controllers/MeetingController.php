@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class MeetingController extends Controller
 {
-    public function avaiableTime(Request $request)
+    public function getAvaiableTime(Request $request)
     {
         $canBookTime = collect(CarbonPeriod::create('08:00', '1 hour', '19:00'))
             ->map(fn($time) => $time->format('H:i'))
@@ -28,7 +28,7 @@ class MeetingController extends Controller
         return response()->json($response);
     }
 
-    public function avaiablePeople(Request $request)
+    public function getAvaiablePeople(Request $request)
     {
         $allUserId = User::get()->pluck('id')->toArray();
         $haveMeetingPeople = Meeting::leftjoin('meeting_records', 'meetings.id', '=', 'meeting_records.meeting_id')
@@ -77,7 +77,7 @@ class MeetingController extends Controller
         // 把資料寫進meetings表
         $dateTime = Carbon::parse(request('date') . ' ' . request('time'));
         $now = Carbon::now()->format('Y-m-d\TH:i');
-        if($dateTime < $now){
+        if ($dateTime < $now) {
             return redirect('/meetings')->with('error', '你的時間不可以低於現在');
         }
         $user = session('username');
@@ -131,8 +131,8 @@ class MeetingController extends Controller
         $meeting = Meeting::find($id);
         $userId = $request->user()->id;
         $now = Carbon::now()->format('Y-m-d\TH:i');
-        
-        if($request->start_at<$now){
+
+        if ($request->start_at < $now) {
             return redirect('/meetings/' . $id . '/edit')->with('error', '你的時間不可以低於現在');
         }
         if ($request->start_at > $request->end_at) {
