@@ -13,7 +13,7 @@ class OrderRequest extends FormRequest
     public function authorize(): bool
     {
         if (!Auth::check()) {
-            abort(403, '請先登入在進行操作');
+            abort(403, '請先登入再進行操作');
         }
 
         return true;
@@ -26,7 +26,6 @@ class OrderRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             '_token' => 'required|string',
             'order_id' => 'required|integer',

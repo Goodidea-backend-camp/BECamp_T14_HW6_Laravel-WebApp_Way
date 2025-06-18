@@ -10,6 +10,7 @@ class OrderRecordRepository implements OrderRecordRepositoryInterface
     public function all()
     {
         $products = OrderRecord::Paginate(10);
+
         return $products;
     }
 
@@ -38,6 +39,7 @@ class OrderRecordRepository implements OrderRecordRepositoryInterface
                 'description' => $item['description']
             ]);
         }
+
         return true;
     }
 }

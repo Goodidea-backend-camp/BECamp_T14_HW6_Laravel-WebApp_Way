@@ -12,6 +12,7 @@ class OrderService
     protected $orderRepository;
     protected $orderRecordRepository;
     protected $productRepository;
+
     public function __construct(OrderRepositoryInterface $orderRepository, OrderRecordRepositoryInterface $orderRecordRepository, ProductRepositoryInterface $productRepository)
     {
         $this->orderRepository = $orderRepository;

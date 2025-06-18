@@ -13,6 +13,7 @@ class OrderController extends Controller
 {
     protected $orderService;
     protected $storeService;
+
     public function __construct(OrderService $orderService, StoreService $storeService)
     {
         $this->orderService = $orderService;
@@ -28,12 +29,12 @@ class OrderController extends Controller
         $orders = collect();
         $ownOrders = collect();
         if ($path === 'dinbandon') {
-            // 取的使用者參與的團夠單資訊
+            // 取的使用者參與的團購單資訊
             $orders = $this->orderService->getParticipatedOrdersInfoByUserId($userId);
         } else {
             // 取得使用者負責的團購單資訊
             $ownOrders = $this->orderService->getManagedOrdersInfoByUserId($userId);
-            // 取的使用者參與的團夠單資訊
+            // 取的使用者參與的團購單資訊
             $orders = $this->orderService->getParticipatedOrdersInfoByUserId($userId);
         }
 

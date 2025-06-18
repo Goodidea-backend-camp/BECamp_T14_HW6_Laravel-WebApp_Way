@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    protected $storeSerivce;
+    protected $storeService;
 
-    public function __construct(StoreService $storeSerivce)
+    public function __construct(StoreService $storeService)
     {
-        $this->storeSerivce = $storeSerivce;
+        $this->storeService = $storeService;
     }
 
     /**
@@ -21,7 +21,7 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = $this->storeSerivce->getAllStores();
+        $stores = $this->storeService->getAllStores();
 
         return view('all-bandon', ['stores' => $stores]);
     }
@@ -40,7 +40,7 @@ class StoreController extends Controller
             'address' => $validatedData['address'],
             'description' => $validatedData['description'],
         ];
-        $store = $this->storeSerivce->createStore($storeData);
+        $store = $this->storeService->createStore($storeData);
 
         // 商品寫入資料庫
         if (isset($validatedData['menu']) && is_array($validatedData['menu'])) {
@@ -53,7 +53,7 @@ class StoreController extends Controller
                     'price' => $menuData['price'],
                 ];
             }
-            $this->storeSerivce->insertProduct($productData);
+            $this->storeService->insertProduct($productData);
         }
         return redirect('dinbandon/stores')->with('success', '已成功新增店家資訊');
     }
@@ -63,28 +63,12 @@ class StoreController extends Controller
      */
     public function show(string $id)
     {
-        $menus = $this->storeSerivce->getMenu($id);
-        $storeInfo = $this->storeSerivce->getStore($id);
+        $menus = $this->storeService->getMenu($id);
+        $storeInfo = $this->storeService->getStore($id);
 
         return view('store', [
             'storeInfo' => $storeInfo,
             'menus' => $menus
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

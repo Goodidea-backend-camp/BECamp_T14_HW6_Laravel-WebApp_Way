@@ -9,6 +9,7 @@ use App\Models\User;
 class OrderRecord extends Model
 {
     use HasFactory;
+
     public $timestamps = false;
 
     protected $fillable = [

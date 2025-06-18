@@ -18,6 +18,7 @@ class OrderRepository implements OrderRepositoryInterface
             'end_at' => $updateData->end_time,
         ]);
     }
+
     public function findManagedOrdersInfoByUserId(int $userId): Collection
     {
         return Order::where('create_user_id', $userId)
@@ -70,7 +71,7 @@ class OrderRepository implements OrderRepositoryInterface
                 ->select('product_id', 'number', 'total_price', 'is_paid', 'description', 'user_id')
                 ->get();
 
-            // 过滤出订单拥有者自己的记录
+            // 過濾訂單擁有者自己的紀錄
             $ownerRecords = $allOrderRecords->filter(function ($record) use ($userId) {
                 return $record->user_id === $userId;
             })->map(function ($orderRecord) {
@@ -85,7 +86,7 @@ class OrderRepository implements OrderRepositoryInterface
                 ];
             });
 
-            // 过滤出其他参与者的记录
+            // 過濾出其他參與者的紀錄
             $otherParticipantsRecords = $allOrderRecords->filter(function ($record) use ($userId) {
                 return $record->user_id !== $userId;
             })->map(function ($orderRecord) {
@@ -106,7 +107,7 @@ class OrderRepository implements OrderRepositoryInterface
                 'otherParticipantsRecords' => $otherParticipantsRecords,
             ];
         } else {
-            // 如果用户不是订单拥有者，只返回该用户的记录
+            // 用戶非擁有者，只返回該用戶的紀錄
             $myOrderRecords = OrderRecord::where('order_id', $orderId)
                 ->where('user_id', $userId)
                 ->with('product:id,name,property')
