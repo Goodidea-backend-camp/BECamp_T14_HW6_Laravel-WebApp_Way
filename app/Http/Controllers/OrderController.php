@@ -62,7 +62,7 @@ class OrderController extends Controller
         $storeInfo = $this->storeService->getStore($storeId);
         $storeMenu = $this->storeService->getMenu($storeId);
         $userOrder = $this->orderService->getOrderInfoByOrderId($id, $userId);
-        // $otherOrder = $this->orderService->
+
         $responseData = collect([
             'order_id' => $id,
             'store_id' => $storeId,
@@ -93,14 +93,6 @@ class OrderController extends Controller
         $newOrders = $this->orderService->storeNewOrder($userId, $orderId, $storeId, $tempOrders);
 
         return redirect('/dinbandon/orders/' . $orderId);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     public function storeInfo()

@@ -55,6 +55,7 @@ class StoreController extends Controller
             }
             $this->storeService->insertProduct($productData);
         }
+
         return redirect('dinbandon/stores')->with('success', '已成功新增店家資訊');
     }
 
