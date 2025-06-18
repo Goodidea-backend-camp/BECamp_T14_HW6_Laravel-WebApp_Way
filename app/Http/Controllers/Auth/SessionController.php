@@ -17,7 +17,7 @@ class SessionController extends Controller
         $errors = [];
         $attributes = $request->validate([
             'username' => ['required'],
-            'password' => ['required']
+            'password' => ['required'],
         ]);
 
         if (! Auth::attempt($attributes)) {
@@ -27,11 +27,13 @@ class SessionController extends Controller
                     ->withErrors($errors)
                     ->withInput();
             }
+            
             return redirect('/');
         }
 
         $request->session()->regenerate();
         $request->session()->put('username', $attributes['username']);
+
         return redirect('/');
     }
 

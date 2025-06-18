@@ -3,18 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MeetingController;
 use Illuminate\Contracts\Session\Session;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dinbandon', function () {
-    return view('bandon');
+Route::middleware('auth')->prefix('meetings')->group(function () {
+    Route::get('/', [MeetingController::class, 'index']);
+    Route::get('{id}/edit', [MeetingController::class, 'edit'])->where('id', '[0-9]+');
+    Route::post('/', [MeetingController::class, 'store']);
+    Route::patch('{id}', [MeetingController::class, 'update'])->where('id', '[0-9]+');
+    Route::delete('{id}', [MeetingController::class, 'destroy'])->where('id', '[0-9]+');
 });
 
-Route::get('/meetroom', function () {
-    return view('meetroom');
+Route::middleware('auth')->prefix('dinbandon')->group(function () {
+    Route::get('/', function () {
+        return view('bandon');
+    });
 });
 
 Route::get('/register', function () {

@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $APP_ENV = env('APP_ENV');
         
         if($APP_ENV == 'local'){
-            User::factory(5)->create();
+            User::factory(20)->create();
         }
         
     }
