@@ -22,8 +22,8 @@ Route::middleware('auth')->prefix('meetings')->group(function () {
 
 Route::middleware('auth')->prefix('dinbandon')->group(function () {
     Route::get('/', [OrderController::class, 'index']);
-    Route::get('addorders', [OrderController::class, 'storeInfo']);
-    Route::get('addstores', function () {
+    Route::get('order/create', [OrderController::class, 'storeInfo']);
+    Route::get('store/create', function () {
         return view('add-store');
     });
     Route::apiResource('stores', StoreController::class)->only(['index', 'show', 'store']);

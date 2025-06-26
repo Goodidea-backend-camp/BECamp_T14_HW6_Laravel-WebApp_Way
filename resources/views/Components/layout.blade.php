@@ -271,9 +271,9 @@
                     <a href="/dinbandon" class="dropbtn">DingBanDon</a>
                     <div class="dropdown-content">
                         <a href="/dinbandon/stores">商店資訊</a>
-                        <a href="/dinbandon/addstores">新增店家</a>
+                        <a href="/dinbandon/store/create">新增店家</a>
                         <a href="/dinbandon/orders">訂單頁面</a>
-                        <a href="/dinbandon/addorders">新增order</a>
+                        <a href="/dinbandon/order/create">新增order</a>
                     </div>
                 </li>
                 <li><a href="/meetings">MeetingRoom</a></li>
