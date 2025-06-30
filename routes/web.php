@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Contracts\Session\Session;
 
 Route::get('/', function () {
@@ -19,9 +21,14 @@ Route::middleware('auth')->prefix('meetings')->group(function () {
 });
 
 Route::middleware('auth')->prefix('dinbandon')->group(function () {
-    Route::get('/', function () {
-        return view('bandon');
+    Route::get('/', [OrderController::class, 'index']);
+    Route::get('order/create', [OrderController::class, 'storeInfo']);
+    Route::get('store/create', function () {
+        return view('add-store');
     });
+    Route::apiResource('stores', StoreController::class)->only(['index', 'show', 'store']);
+    Route::apiResource('orders', OrderController::class)->only(['index', 'show', 'store']);
+    Route::patch('orders/{id}', [OrderController::class, 'update'])->where('id', '[0-9]+');
 });
 
 Route::get('/register', function () {

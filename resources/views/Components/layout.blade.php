@@ -58,6 +58,7 @@
 
         .menu li {
             float: left;
+            position: relative;
         }
 
         .menu a {
@@ -70,6 +71,38 @@
         }
 
         .menu a:hover {
+            background-color: #ffc078;
+            color: #333;
+        }
+
+        /* Dropdown Styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #ffc078;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ffc078;
+            color: #333;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
             background-color: #ffc078;
             color: #333;
         }
@@ -234,7 +267,15 @@
 
             <ul class="menu">
                 @auth
-                <li><a href="/dinbandon">DingBanDon</a></li>
+                <li class="dropdown">
+                    <a href="/dinbandon" class="dropbtn">DingBanDon</a>
+                    <div class="dropdown-content">
+                        <a href="/dinbandon/stores">商店資訊</a>
+                        <a href="/dinbandon/store/create">新增店家</a>
+                        <a href="/dinbandon/orders">訂單頁面</a>
+                        <a href="/dinbandon/order/create">新增order</a>
+                    </div>
+                </li>
                 <li><a href="/meetings">MeetingRoom</a></li>
                 @endauth
                 @guest
